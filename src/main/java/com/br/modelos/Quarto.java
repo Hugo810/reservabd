@@ -10,14 +10,21 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
+
+
+
+
 @Entity
 @Table(name="quarto")
 public class Quarto {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-	@Column(name="tipo")
-    private String tipo;
+	
+	 @Column(name="tipo")
+	 private TipoQuarto tipo;
+	
+
 	@Column(name="numero")
     private int numero;
 	@Column(name="status")
@@ -34,7 +41,9 @@ public class Quarto {
 	}
 
 	
-    public Quarto(Long id, String tipo, int numero, String status, List<Reserva> reservas) {
+
+
+	public Quarto(Long id, TipoQuarto tipo, int numero, String status, List<Reserva> reservas) {
 		super();
 		this.id = id;
 		this.tipo = tipo;
@@ -42,51 +51,39 @@ public class Quarto {
 		this.status = status;
 		this.reservas = reservas;
 	}
-
-
-	// Getters e Setters
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-
-    public int getNumero() {
-        return numero;
-    }
-
-    public void setNumero(int numero) {
-        this.numero = numero;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-    
-    
-
-    public List<Reserva> getReservas() {
-		return reservas;
+	
+	public Long getId() {
+		return id;
 	}
 
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public TipoQuarto getTipo() {
+		return tipo;
+	}
+	public void setTipo(TipoQuarto tipo) {
+		this.tipo = tipo;
+	}
+	public int getNumero() {
+		return numero;
+	}
+	public void setNumero(int numero) {
+		this.numero = numero;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	public List<Reserva> getReservas() {
+		return reservas;
+	}
 	public void setReservas(List<Reserva> reservas) {
 		this.reservas = reservas;
 	}
-
 	// toString para representação textual do objeto
     @Override
     public String toString() {

@@ -21,6 +21,7 @@ public class QuartoControler {
 
     // Listar todos os quartos
     @GetMapping("/quarto")
+    @CrossOrigin(origins = "http://localhost:4200")
     public List<Quarto> listarQuartos() {
         return quartoRepository.findAll();
     }
