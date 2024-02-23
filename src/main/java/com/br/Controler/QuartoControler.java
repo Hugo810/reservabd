@@ -39,7 +39,7 @@ public class QuartoControler {
     @GetMapping("/status/{status}")
     public ResponseEntity<List<Quarto>> consultarPorStatus(@PathVariable StatusQuarto status) {
         // Busca os quartos por status no repositório
-        List<Quarto> quartosPorStatus = quartoRepository.findByStatusQuato(status);
+        List<Quarto> quartosPorStatus = quartoRepository.findByStatus(status);
         
         // Verifica se existem quartos com o status especificado
         if (quartosPorStatus.isEmpty()) {
