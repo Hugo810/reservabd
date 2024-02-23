@@ -27,8 +27,12 @@ public class Quarto {
 
 	@Column(name="numero")
     private int numero;
+	
+	@Column(name="preco")
+	private Double preco;
+	
 	@Column(name="status")
-    private String status;
+    private StatusQuarto status;
 	
 	@OneToMany(mappedBy = "quarto")
 	private List<Reserva> reservas;
@@ -39,19 +43,18 @@ public class Quarto {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
-	
-
-
-	public Quarto(Long id, TipoQuarto tipo, int numero, String status, List<Reserva> reservas) {
+    
+	public Quarto(Long id, TipoQuarto tipo, int numero, Double preco, StatusQuarto status, List<Reserva> reservas) {
 		super();
 		this.id = id;
 		this.tipo = tipo;
 		this.numero = numero;
+		this.preco = preco;
 		this.status = status;
 		this.reservas = reservas;
 	}
-	
+
+
 	public Long getId() {
 		return id;
 	}
@@ -63,27 +66,43 @@ public class Quarto {
 	public TipoQuarto getTipo() {
 		return tipo;
 	}
+
 	public void setTipo(TipoQuarto tipo) {
 		this.tipo = tipo;
 	}
+
 	public int getNumero() {
 		return numero;
 	}
+
 	public void setNumero(int numero) {
 		this.numero = numero;
 	}
-	public String getStatus() {
+
+	public Double getPreco() {
+		return preco;
+	}
+
+	public void setPreco(Double preco) {
+		this.preco = preco;
+	}
+
+	public StatusQuarto getStatus() {
 		return status;
 	}
-	public void setStatus(String status) {
+
+	public void setStatus(StatusQuarto status) {
 		this.status = status;
 	}
+
 	public List<Reserva> getReservas() {
 		return reservas;
 	}
+
 	public void setReservas(List<Reserva> reservas) {
 		this.reservas = reservas;
 	}
+
 	// toString para representação textual do objeto
     @Override
     public String toString() {
