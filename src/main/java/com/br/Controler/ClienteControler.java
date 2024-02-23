@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.br.Exception.ResourceNotFoundException;
 import com.br.Repository.ClienteRepository;
 import com.br.modelos.Cliente;
+import com.br.modelos.TipoCliente;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/c_cliente/")
@@ -40,6 +41,17 @@ public class ClienteControler {
                 .orElseThrow(() -> new ResourceNotFoundException("Cliente não encontrado: " + id));
         return ResponseEntity.ok(cliente);
     }
+    
+    @GetMapping("/cliente/tipo/{tipo}")
+    public List<Cliente> consultarPorTipo(@PathVariable TipoCliente tipo) {
+        List<Cliente> clientesPorTipo = this.mRep.findByTipo(tipo);
+        if (clientesPorTipo.isEmpty()) {
+            throw new ResourceNotFoundException("Clientes não encontrados para o tipo: " + tipo);
+        }
+        return clientesPorTipo;
+    }
+
+
 
     // Inserir novo cliente
     @PostMapping("/cliente")
@@ -73,4 +85,7 @@ public class ClienteControler {
         resposta.put("Cliente excluído!", Boolean.TRUE);
         return ResponseEntity.ok(resposta);
     }
+    
+    
+
 }

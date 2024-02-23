@@ -4,6 +4,8 @@ import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -16,7 +18,7 @@ public class Cliente {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long codigo;
+	private Long id;
 	
 	@Column(name="nome")
 	private String nome;
@@ -25,7 +27,8 @@ public class Cliente {
 	private String email;
 	
 	@Column(name="tipo")
-	private String tipo;
+	@Enumerated(EnumType.STRING) // Indica que o tipo do enum será armazenado como uma string no banco de dados
+	private TipoCliente tipo;
 	
 	@OneToMany(mappedBy = "cliente")
     private List<Reserva> reservas;
@@ -35,25 +38,21 @@ public class Cliente {
 		super();
 	}
 
-	
-
-	public Cliente(Long codigo, String nome, String email, String tipo, List<Reserva> reservas) {
+	public Cliente(Long id, String nome, String email, TipoCliente tipo, List<Reserva> reservas) {
 		super();
-		this.codigo = codigo;
+		this.id = id;
 		this.nome = nome;
 		this.email = email;
 		this.tipo = tipo;
 		this.reservas = reservas;
 	}
 
-
-
-	public Long getCodigo() {
-		return codigo;
+	public Long getId() {
+		return id;
 	}
 
-	public void setCodigo(Long codigo) {
-		this.codigo = codigo;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getNome() {
@@ -72,21 +71,22 @@ public class Cliente {
 		this.email = email;
 	}
 
-	public String getTipo() {
+	public TipoCliente getTipo() {
 		return tipo;
 	}
 
-	public void setTipo(String tipo) {
+	public void setTipo(TipoCliente tipo) {
 		this.tipo = tipo;
 	}
-	
-	public List<Reserva> getReservas() {
-        return reservas;
-    }
 
-    public void setReservas(List<Reserva> reservas) {
-        this.reservas = reservas;
-    }
+	public List<Reserva> getReservas() {
+		return reservas;
+	}
+
+	public void setReservas(List<Reserva> reservas) {
+		this.reservas = reservas;
+	}
+
 	
 	
 }
