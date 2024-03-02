@@ -2,8 +2,8 @@ package com.br.modelos;
 
 public enum StatusQuarto {
 	
-	OCUPADO,
+	OCUPADO ,
 	MANUTENCAO,
-	DISPONIVEL,
+	DISPONIVEL
 
 }

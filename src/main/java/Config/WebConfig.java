@@ -1,17 +1,36 @@
 package Config;
 
-import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import java.io.IOException;
 
-@Configuration
-public class WebConfig implements WebMvcConfigurer {
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletResponse;
 
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**") // Permitindo CORS em todas as URLs
-                .allowedOrigins("*") // Permitindo solicitações de todas as origens
-                .allowedMethods("GET", "POST", "PUT", "DELETE") // Permitindo os métodos HTTP especificados
-                .allowedHeaders("*"); // Permitindo todos os cabeçalhos
-    }
+import org.springframework.core.annotation.Order;
+import org.springframework.stereotype.Component;
+
+import com.fasterxml.classmate.Filter;
+
+@Component
+@Order(1)
+public class WebConfig implements Filter {
+
+public void doFilter(ServletRequest req, ServletResponse res,
+        FilterChain chain) throws IOException, ServletException {
+    HttpServletResponse response = (HttpServletResponse) res;
+    response.setHeader("Access-Control-Allow-Origin", "*");
+    response.setHeader("Access-Control-Expose-Headers", "Content-Disposition");
+    response.setHeader("Access-Control-Allow-Methods", "GET,POST,PATCH,DELETE,PUT,OPTIONS");
+    response.setHeader("Access-Control-Allow-Headers", "*");
+    response.setHeader("Access-Control-Max-Age", "86400");
+    chain.doFilter(req, res);
+}
+
+@Override
+public boolean include(Object element) {
+	// TODO Auto-generated method stub
+	return false;
+}
 }

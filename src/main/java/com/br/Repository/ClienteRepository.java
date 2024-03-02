@@ -12,5 +12,7 @@ import com.br.modelos.TipoCliente;
 public interface ClienteRepository extends JpaRepository<Cliente, Long> {
 
     List<Cliente> findByTipo(TipoCliente tipo);
+
+	List<Cliente> findByNomeStartingWith(String nome);
 }
 

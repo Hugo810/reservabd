@@ -7,4 +7,5 @@ import com.br.modelos.Reserva;
 @Repository
 public interface ReservaRepository extends JpaRepository<Reserva, Long>{
 
+	Reserva save(Reserva reserva);
 }
