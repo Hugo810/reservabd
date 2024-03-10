@@ -30,8 +30,8 @@ public class Quarto {
     @Enumerated(EnumType.STRING)
     private StatusQuarto status;
     
-    @Column(name="disponivel")
-    private boolean disponivel;
+    //@Column(name="disponivel")
+    //private boolean disponivel;
 
     public Quarto() {
         super();
@@ -44,7 +44,7 @@ public class Quarto {
         this.numero = numero;
         this.preco = preco;
         this.status = status;
-        this.disponivel = disponivel;
+        //this.disponivel = disponivel;
     }
 
     public Long getId() {
@@ -87,11 +87,11 @@ public class Quarto {
         this.status = status;
     }
 
-    public boolean isDisponivel() {
-        return disponivel;
-    }
+    //public boolean isDisponivel() {
+      //  return disponivel;
+    //}
 
-    public void setDisponivel(boolean disponivel) {
-        this.disponivel = disponivel;
-    }
+    //public void setDisponivel(boolean disponivel) {
+      //  this.disponivel = disponivel;
+    //}
 }

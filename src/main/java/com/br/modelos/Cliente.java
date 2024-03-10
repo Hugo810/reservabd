@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 
 @Entity   //Entidade
@@ -32,6 +34,7 @@ public class Cliente {
 	@Enumerated(EnumType.STRING) // Indica que o tipo do enum será armazenado como uma string no banco de dados
 	private TipoCliente tipo;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "cliente")
     private List<Reserva> reservas;
 	

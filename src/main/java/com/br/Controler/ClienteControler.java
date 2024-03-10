@@ -19,6 +19,7 @@ import com.br.Exception.ResourceNotFoundException;
 import com.br.Repository.ClienteRepository;
 import com.br.modelos.Cliente;
 import com.br.modelos.TipoCliente;
+import com.fasterxml.jackson.annotation.JsonIgnore; // Importação adicionada
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/c_cliente/")
@@ -41,6 +42,14 @@ public class ClienteControler {
                 .orElseThrow(() -> new ResourceNotFoundException("Cliente não encontrado: " + id));
         return ResponseEntity.ok(cliente);
     }
+    @GetMapping("/cliente/nome/{nome}")
+    public ResponseEntity<List<Cliente>> consultarPorNome(@PathVariable String nome) {
+        List<Cliente> clientes = this.mRep.findByNome(nome);
+        if (clientes.isEmpty()) {
+            throw new ResourceNotFoundException("Nenhum cliente encontrado com o nome: " + nome);
+        }
+        return ResponseEntity.ok(clientes);
+    }
     
     @GetMapping("/cliente/tipo/{tipo}")
     public List<Cliente> consultarPorTipo(@PathVariable TipoCliente tipo) {
@@ -50,8 +59,6 @@ public class ClienteControler {
         }
         return clientesPorTipo;
     }
-
-
 
     // Inserir novo cliente
     @PostMapping("/cliente")
@@ -86,6 +93,9 @@ public class ClienteControler {
         return ResponseEntity.ok(resposta);
     }
     
-    
-
+    // A anotação @JsonIgnore foi adicionada para evitar referências cíclicas durante a serialização dos objetos
+    @JsonIgnore
+    public List<Cliente> getReservas() {
+        return this.mRep.findAll();
+    }
 }

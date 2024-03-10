@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.br.modelos.TipoCliente;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/tipos-cliente")
-@CrossOrigin(origins = "http://localhost:4200")
 public class TipoClienteControler {
 
     @GetMapping

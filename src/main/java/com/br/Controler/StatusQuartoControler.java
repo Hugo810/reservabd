@@ -7,9 +7,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.br.modelos.StatusQuarto; // Importe o enum correto
 
+
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/status-quarto")
-@CrossOrigin(origins = "http://localhost:4200")
 public class StatusQuartoControler {
 	    
     @GetMapping

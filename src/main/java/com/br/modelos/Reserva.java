@@ -21,9 +21,6 @@ public class Reserva {
     @Column(name = "data_inicio")
     private Date dataInicio;
 
-    @Column(name = "data_fim")
-    private Date dataFim;
-
     @Column(name = "quantidade_dias")
     private int quantidadeDias;
 
@@ -33,14 +30,23 @@ public class Reserva {
     public Reserva() {
     }
 
-    public Reserva(Long id, Cliente cliente, Quarto quarto, Date dataInicio, Date dataFim, int quantidadeDias, double valorReserva) {
+    public Reserva(Long id, Cliente cliente, Quarto quarto, Date dataInicio, /*Date dataFim,*/ int quantidadeDias, double valorReserva) {
         this.id = id;
         this.cliente = cliente;
         this.quarto = quarto;
         this.dataInicio = dataInicio;
-        this.dataFim = dataFim;
         this.quantidadeDias = quantidadeDias;
         this.valorReserva = valorReserva;
+    }
+    
+    /*public int calcularQuantidadeDias() {
+        long diffEmMillis = Math.abs(dataFim.getTime() - dataInicio.getTime());
+        long diffEmDias = diffEmMillis / (24 * 60 * 60 * 1000);
+        return quantidadeDias = (int) diffEmDias;
+    }*/
+    
+    public void calcularValorReserva() {
+        valorReserva = quantidadeDias * quarto.getPreco();
     }
 
     public Long getId() {
@@ -75,14 +81,6 @@ public class Reserva {
         this.dataInicio = dataInicio;
     }
 
-    public Date getDataFim() {
-        return dataFim;
-    }
-
-    public void setDataFim(Date dataFim) {
-        this.dataFim = dataFim;
-    }
-
     public int getQuantidadeDias() {
         return quantidadeDias;
     }
@@ -99,16 +97,5 @@ public class Reserva {
         this.valorReserva = valorReserva;
     }
 
-    @Override
-    public String toString() {
-        return "Reserva{" +
-                "id=" + id +
-                ", cliente=" + cliente +
-                ", quarto=" + quarto +
-                ", dataInicio=" + dataInicio +
-                ", dataFim=" + dataFim +
-                ", quantidadeDias=" + quantidadeDias +
-                ", valorReserva=" + valorReserva +
-                '}';
-    }
+	
 }
