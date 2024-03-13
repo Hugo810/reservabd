@@ -22,7 +22,7 @@ import com.br.modelos.Reserva;
 
 @CrossOrigin(origins = "http://localhost:4200/")
 @RestController
-@RequestMapping("/c_reservas")
+@RequestMapping("/c_reservas/")
 public class ReservaControler {
 
     @Autowired
@@ -32,7 +32,7 @@ public class ReservaControler {
     private QuartoRepository quartoRepository;
 
     // Listar todas as reservas
-    @GetMapping("/reserva")
+    @GetMapping("reserva/listareserva")
     public List<Reserva> listarReservas() {
         return reservaRepository.findAll();
     }
