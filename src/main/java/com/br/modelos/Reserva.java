@@ -3,17 +3,20 @@ package com.br.modelos;
 import java.util.Date;
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "reserva")
 public class Reserva {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    
+    
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
-
+    
     @ManyToOne
     @JoinColumn(name = "quarto_id")
     private Quarto quarto;
