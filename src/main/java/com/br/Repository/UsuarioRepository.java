@@ -8,4 +8,6 @@ import com.br.modelos.Usuario;
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 	
 	List<Usuario> findAll();
+	Usuario findByEmail(String email);
+	
 }

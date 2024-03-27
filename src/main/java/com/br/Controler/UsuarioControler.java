@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,12 +22,24 @@ import com.br.Repository.UsuarioRepository;
 import com.br.modelos.Usuario;
 
 @CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping("/usuarios/")
+@RequestMapping("/c_usuario")
 @RestController
 public class UsuarioControler {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
+    
+    @PostMapping("/login")
+    public ResponseEntity<Map<String, String>> login(@RequestBody Usuario loginRequest) {
+        Usuario usuario = usuarioRepository.findByEmail(loginRequest.getEmail());
+        if (usuario != null && usuario.getSenha().equals(loginRequest.getSenha())) {
+            Map<String, String> response = new HashMap<>();
+            response.put("message", "Login bem-sucedido");
+            return ResponseEntity.ok(response);
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+        }
+    }
 
     // Listar todos os usuários
     @GetMapping("/listar")
